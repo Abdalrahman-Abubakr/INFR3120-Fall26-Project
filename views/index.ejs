@@ -48,13 +48,13 @@
             <% reports.forEach(item => { %>
               <tr>
                 <%# Display item title in bold %>
-                <td class="fw-bold"><%= item.title %></td>
+                <td class="fw-bold"><%= item.itemName %></td>
                 <%# Display item category %>
                 <td><%= item.category %></td>
                 <%# Conditionally apply badge color based on Lost (danger/red) vs Found (success/green) %>
                 <td>
                   <span class="badge <%= item.type === 'Lost' ? 'bg-danger' : 'bg-success' %>">
-                    <%= item.type %>
+                    <%= item.reportType %>
                   </span>
                 </td>
                 <%# Display location where item was lost or found %>
