@@ -6,4 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/* GET report creation form */
+router.get('/reports/add', function(req, res, next) {
+  res.render('add-report');
+});
+
 module.exports = router;

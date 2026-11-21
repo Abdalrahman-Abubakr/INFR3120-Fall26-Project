@@ -1,11 +1,89 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+  <%# Meta tags defining character set and responsive viewport bounds %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusFind - Lost & Found Portal</title>
+
+  <%# External Bootstrap 5 CDN stylesheet for UI layout and styling %>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+  <%# Import the global navigation header partial %>
+  <%- include('partials/header') %>
+
+  <div class="container my-5">
+    <%# Hero Banner section introducing the site and providing the primary call to action %>
+    <div class="p-5 mb-4 bg-white rounded-3 shadow-sm text-center">
+      <h1 class="display-5 fw-bold text-dark">Campus Lost & Found</h1>
+      <p class="col-md-8 mx-auto fs-5 text-muted">
+        Reuniting Ontario Tech students and staff with their lost belongings.
+      </p>
+      <%# Hero action button linking directly to the item creation form %>
+      <a href="/reports/add" class="btn btn-primary btn-lg px-4 me-md-2">Report a Lost or Found Item</a>
+    </div>
+
+    <%# Section heading for current lost and found database records %>
+    <h2 class="mb-3">Recent Reports</h2>
+
+    <%# Table wrapper ensuring horizontal scrolling on small screens %>
+    <div class="table-responsive bg-white rounded-3 shadow-sm p-3">
+      <table class="table table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <%# Defining table headers for data attributes %>
+            <th>Item Name</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%# Check if reports array is passed from Express route and contains items %>
+          <% if (typeof reports !== 'undefined' && reports.length > 0) { %>
+            <%# Iterate over each report object to output table rows %>
+            <% reports.forEach(item => { %>
+              <tr>
+                <%# Display item title in bold %>
+                <td class="fw-bold"><%= item.title %></td>
+                <%# Display item category %>
+                <td><%= item.category %></td>
+                <%# Conditionally apply badge color based on Lost (danger/red) vs Found (success/green) %>
+                <td>
+                  <span class="badge <%= item.type === 'Lost' ? 'bg-danger' : 'bg-success' %>">
+                    <%= item.type %>
+                  </span>
+                </td>
+                <%# Display location where item was lost or found %>
+                <td><%= item.location %></td>
+                <%# Display date of incident %>
+                <td><%= item.date %></td>
+                <%# Conditionally render status badge color %>
+                <td>
+                  <span class="badge <%= item.status === 'Claimed' ? 'bg-secondary' : 'bg-primary' %>">
+                    <%= item.status %>
+                  </span>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <%# Fallback row rendered when no reports exist in the database %>
+            <tr>
+              <td colspan="6" class="text-center text-muted py-4">No lost or found items reported yet.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%# Import the global footer partial %>
+  <%- include('partials/footer') %>
+
+  <%# External Bootstrap JavaScript bundle for interactive components %>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

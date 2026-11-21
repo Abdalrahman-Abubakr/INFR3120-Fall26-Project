@@ -1,0 +1,28 @@
+<%# Navigation bar included across view pages %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <%# Brand link displaying logo and application title, routing to home %>
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <span class="fs-4 fw-bold me-2">🔍 CampusFind</span>
+    </a>
+
+    <%# Toggle button for mobile responsiveness %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <%# Collapsible navigation menu links %>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <%# Home navigation item %>
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Home</a>
+        </li>
+        <%# Hero action link pointing to the report creation form %>
+        <li class="nav-item">
+          <a class="nav-link btn btn-warning text-dark px-3 ms-lg-2" href="/reports/add">+ Report Item</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
